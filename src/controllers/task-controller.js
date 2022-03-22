@@ -1,7 +1,7 @@
 import pool from "./../config/dbConfig";
 
 export default {
-  
+  // Return all tasks from db
   async getTasksList(req, res, next) {
     let query = "SELECT * FROM tasks";
 
@@ -19,6 +19,7 @@ export default {
     });
   },
 
+  // Add new task to db
   async addTask(req, res, next) {
     const TASK_NAME = req.body;
     
@@ -27,18 +28,21 @@ export default {
     });
   },
 
+  // Remove existing task from db
   async removeTask(req, res, next) {
     return res.status(200).send({
       msg: "Remove task work!",
     });
   },
 
+  // Update concrete task in db
   async updateTask(req, res, next) {
     return res.status(200).send({
       msg: "Update task work!",
     });
   },
 
+  // Change priority of task
   async changePriority(req, res, next) {
     return res.status(200).send({
       msg: "Change priority task work!",

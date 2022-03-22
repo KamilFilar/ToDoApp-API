@@ -9,7 +9,9 @@ export default () => {
 
     api.get('/all', catchAsync(tastkController.getTasksList));
 
-    api.post('', catchAsync(tastkController.addTask));
+    api.post('/new', catchAsync(tastkController.addTask));
+
+    api.post('/priority', catchAsync(tastkController.changePriority));
 
     api.delete('', catchAsync(tastkController.removeTask));
 
