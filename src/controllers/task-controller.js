@@ -136,12 +136,5 @@ export default {
         connection.release(); // end connection
       }
     });
-  },
-
-  // Change priority of task
-  async changePriority(req, res, next) {
-    return res.status(200).send({
-      msg: "Change priority task work!",
-    });
-  },
+  }
 };
