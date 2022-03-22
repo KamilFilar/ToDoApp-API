@@ -85,7 +85,7 @@ export default {
 
   // Remove existing task from db
   async removeTask(req, res, next) {
-    const TASK_ID = req.body.id;
+    const TASK_ID = req.params.id;
     const TASK_NAME = req.body.name;
 
     const queryREMOVE = "DELETE FROM tasks WHERE `id` = ? AND `name` = ?";
@@ -97,7 +97,7 @@ export default {
         connection.query(queryREMOVE, [TASK_ID, TASK_NAME], (err) => {
           if (!err) {
             return res.status(200).send({
-              msg: `Task: "${TASK_NAME}" has been removed successful!`
+              msg: `Task has been removed successful!`
             })
           }
           else {
@@ -112,8 +112,29 @@ export default {
 
   // Update concrete task in db
   async updateTask(req, res, next) {
-    return res.status(200).send({
-      msg: "Update task work!",
+    const TASK_ID = req.params.id;
+    const TASK_NAME = req.body.name;
+    const TASK_PRIORITY = req.body.priority;
+
+    const queryUPADTE = "UPDATE tasks SET `priority` = ?,`name` = ? WHERE `id` = ?";
+    
+    // Open connect with db
+    pool.getConnection( (err, connection) => {
+      if (err) throw err;
+      else {
+        connection.query(queryUPADTE, [TASK_PRIORITY, TASK_NAME, TASK_ID], (err) => {
+          if (!err) {
+            return res.status(200).send({
+              msg: `Task: ${TASK_NAME} has been updated successful!`
+            });
+          }
+          else {
+            console.log(err);
+            return res.status(400).send(err);
+          }
+        });
+        connection.release(); // end connection
+      }
     });
   },
 

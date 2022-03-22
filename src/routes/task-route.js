@@ -11,13 +11,13 @@ export default () => {
 
     api.post('/new', catchAsync(tastkController.addTask));
 
-    api.post('/priority', catchAsync(tastkController.changePriority));
+    api.post('/priority/:id', catchAsync(tastkController.changePriority));
 
     api.delete('/all', catchAsync(tastkController.removeAllTasks));
 
-    api.delete('', catchAsync(tastkController.removeTask));
+    api.delete('/:id', catchAsync(tastkController.removeTask));
 
-    api.put('', catchAsync(tastkController.updateTask));
+    api.put('/:id', catchAsync(tastkController.updateTask));
 
     return api;
 }
